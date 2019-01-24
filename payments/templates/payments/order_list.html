@@ -1,0 +1,10 @@
+{% extends 'payments/base.html' %}
+
+{% block content %}
+	<h2>Orders</h2>
+	<ol>
+		{% for order in object_list %}
+			<li>{{ order }}</li>
+		{% endfor %}
+	</ol>
+{% endblock %}

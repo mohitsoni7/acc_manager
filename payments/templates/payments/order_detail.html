@@ -1,0 +1,11 @@
+{% extends 'payments/base.html' %}
+
+{% block content %}
+    <h2>Order</h2>
+    <p>Client: {{ object.client }}</p>
+    <p>Product: {{ object.product }}</p>
+    <p>Description: {{ object.description }}</p>
+    <p>Date: {{ object.date_of_order }}</p>
+    <p>Quantity: {{ object.quantity }}</p>
+    <p>Rate: {{ object.rate }}</p>
+{% endblock %}
