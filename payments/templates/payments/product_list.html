@@ -1,10 +1,44 @@
 {% extends 'payments/base.html' %}
 
-{% block content %}
-	<h2>Products</h2>
-	<ol>
+{% block page_title %}
+	<p>Products</p>
+{% endblock %}
+
+{% block page_breadcrumb %}
+	<li>
+		<a href="{% url 'payments:products' %}">
+			<i class="fa fa-files-o"></i> <span>Products</span>
+		</a>
+	</li>
+{% endblock %}
+
+{% block page_subtitle %}
+	<p>All Products</p>
+{% endblock %}
+
+{% block main_content %}
+<table id="my_table_id" class="myTable">
+	<thead>
+		<tr>
+			<th>Product Name</th>
+		</tr>
+	</thead>
+	<tbody>
 		{% for product in object_list %}
-			<li>{{ product.product_name }}</li>
+			<tr>
+				<td>
+					{{ product.product_name|capfirst }}
+				</td>
+			</tr>
 		{% endfor %}
-	</ol>
+	</tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+	<script>
+		$(document).ready( function () {
+			$('#my_table_id').DataTable();
+		} );
+	</script>
 {% endblock %}

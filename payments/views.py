@@ -21,14 +21,8 @@ class OrderListView(ListView):
 
 
 class OrderDetailView(DetailView):
-    pass
-    print('ooooooo')
     template_name = 'payments/order_detail.html'
     queryset = Order.objects.all()
-
-    # def get_object(self):
-    #     return get_object_or_404(Order, self.kwargs.get('pk'))
-        
 
 
 class OrderCreateView(CreateView):

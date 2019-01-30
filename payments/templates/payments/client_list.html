@@ -1,10 +1,44 @@
 {% extends 'payments/base.html' %}
 
-{% block content %}
-	<h2>Clients</h2>
-	<ol>
+{% block page_title %}
+	<p>Clients</p>
+{% endblock %}
+
+{% block page_breadcrumb %}
+	<li>
+		<a href="{% url 'payments:clients' %}">
+			<i class="fa fa-users"></i> <span>Clients</span>
+		</a>
+	</li>
+{% endblock %}
+
+{% block page_subtitle %}
+	<p>All Clients</p>
+{% endblock %}
+
+{% block main_content %}
+<table id="my_table_id" class="myTable">
+	<thead>
+		<tr>
+			<th>Client Name</th>
+		</tr>
+	</thead>
+	<tbody>
 		{% for client in object_list %}
-			<li>{{ client.name }}</li>
+			<tr>
+				<td>
+					{{ client.name|capfirst }}
+				</td>
+			</tr>
 		{% endfor %}
-	</ol>
+	</tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+	<script>
+		$(document).ready( function () {
+			$('#my_table_id').DataTable();
+		} );
+	</script>
 {% endblock %}

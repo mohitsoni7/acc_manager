@@ -1,11 +1,64 @@
 {% extends 'payments/base.html' %}
+{% load my_tags %}
 
-{% block content %}
-    <h2>Order</h2>
-    <p>Client: {{ object.client }}</p>
-    <p>Product: {{ object.product }}</p>
-    <p>Description: {{ object.description }}</p>
-    <p>Date: {{ object.date_of_order }}</p>
-    <p>Quantity: {{ object.quantity }}</p>
-    <p>Rate: {{ object.rate }}</p>
+{% block page_title %}
+	<p>Order Details</p>
+{% endblock %}
+
+{% block page_breadcrumb %}
+    <li>
+        <a href="{% url 'payments:orders' %}">
+            <i class="fa fa-users"></i> <span>Orders</span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ object.get_absolute_url }}">
+            <i class="fa fa-users"></i> <span>Order Detail</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block page_subtitle %}
+	<p>Order No. {{ object.pk }}</p>
+{% endblock %}
+
+{% block main_content %}
+<table id="my_table_id" class="myTable">
+		<tr>
+			<th>Date</th>
+			<td>{{ object.date_of_order }}</td>
+        </tr>
+        <tr>
+            <th>Client Name</th>
+            <td>{{ object.client }}</td>
+        </tr>
+        <tr>
+            <th>Product</th>
+            <td>{{ object.product }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ object.description }}</td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td>{{ object.quantity }}</td>
+        </tr>
+        <tr>
+            <th>Rate</th>
+            <td>{{ object.rate }}</td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td>{{ object.quantity|cal:object.rate }}</td>
+        </tr>
+</table>
+{% endblock %}
+
+{% block scripts %}
+	<script>
+		$(document).ready( function () {
+			$('#my_table_id').DataTable();
+		} );
+	</script>
 {% endblock %}
