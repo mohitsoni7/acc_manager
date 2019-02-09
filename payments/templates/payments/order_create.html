@@ -1,7 +1,80 @@
 {% extends 'payments/base.html' %}
-{% block content %}
-    <form action="" method="POST">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save">
-    </form>
+{% load my_tags %}
+
+{% block page_title %}
+	<p>Orders</p>
+{% endblock %}
+
+{% block page_breadcrumb %}
+	<li>
+		<a href="{% url 'payments:orders' %}">
+			<i class="fa fa-list"></i> <span>Orders</span>
+		</a>
+	</li>
+	<li>
+		<a href="{% url 'payments:new-order' %}">
+			<i class="fa fa-cart-plus"></i> <span>New Order</span>
+		</a>
+	</li>
+{% endblock %}
+
+{% block page_subtitle %}
+	<p>New Order</p>
+{% endblock %}
+
+{% block main_content %}
+<div class="container-fluid">
+	<form class="form-horizontal" action="" method="POST">{% csrf_token %}
+		<div class="box-body">
+			{% for field in form %}
+			<div class="form-group">
+				<label for="{{ field.name }}" class="col-sm-2 control-label">
+					{{ field.name|capfirst }}:
+				</label>
+				<div class="col-sm-10">
+					<input type="{{ field.field.widget.input_type }}" class="form-control form-rounded" id="{{ field.name }}-input" placeholder="Enter {{ field.name }}">
+				</div>
+				{% if field.name == 'client' or field.name == 'product' %}
+					<ul id="{{field.name}}-search-results"></ul>
+				{% endif %}
+			</div>
+			{% endfor %}
+		</div>
+		<div class="box-footer">
+			<input type="submit" class="btn btn-primary form-rounded" value="Save">
+		</div>
+</form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+	// Get Client names on Keyboard typing
+	$('#client-input').keyup(function(){
+		var search_text = $('#client-input').val();
+		$.ajax({
+			type: "POST",
+			url: "{% url 'payments:get-client-names' %}",
+			data: {'search_text': search_text},
+			dataType: 'html',
+			success: function(data){
+				$('#client-search-results').html(data);
+			}
+		});
+	});
+
+	// Get Product names on Keyboard typing
+	$('#product-input').keyup(function(){
+			var search_text = $('#product-input').val();
+			$.ajax({
+				type: "POST",
+				url: "{% url 'payments:get-product-names' %}",
+				data: {'search_text': search_text},
+				dataType: 'html',
+				success: function(data){
+					$('#product-search-results').html(data);
+				}
+			});
+		});
+</script>
 {% endblock %}

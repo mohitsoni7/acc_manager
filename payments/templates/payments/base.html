@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="{% static 'payments/css/ionicons.min.css' %}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'payments/css/AdminLTE.min.css' %}">
+  <!-- Custom style -->
+  <link rel="stylesheet" href="{% static 'payments/css/custom-style.css' %}">
   <!-- Datatables -->
   <link rel="stylesheet" href="{% static 'payments/third-party/DataTables/datatables.min.css' %}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -96,6 +98,28 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="no-treeview">
+          <a href="{% url 'payments:new-order' %}">
+            <i class="fa fa-cart-plus"></i> <span>New Order</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i>
+            <span>Orders</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{% url 'payments:orders' %}"><i class="fa fa-circle-o"></i> All</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Delivered</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Pending</a></li>
+          </ul>
+        </li>
+        <li class="no-treeview">
           <a href="{% url 'payments:clients' %}">
             <i class="fa fa-users"></i> <span>Clients</span>
             <span class="pull-right-container">
@@ -112,20 +136,6 @@
             </span>
           </a>
         </li>
-        <li class="treeview">
-            <a href="#">
-              <i class="fa fa-list"></i>
-              <span>Orders</span>
-              <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="{% url 'payments:orders' %}"><i class="fa fa-circle-o"></i> All</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Delivered</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Pending</a></li>
-            </ul>
-          </li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -225,6 +235,8 @@
 <script src="{% static 'payments/js/adminlte.min.js' %}"></script>
 <!-- DataTables -->
 <script src="{% static 'payments/third-party/DataTables/datatables.min.js' %}"></script>
+<!-- AJAXSetup -->
+<script src="{% static 'payments/js/ajax-setup.js' %}"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()

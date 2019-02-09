@@ -6,6 +6,8 @@ from .views import (
     OrderListView,
     OrderDetailView,
     OrderCreateView,
+    AjaxGetClientNamesView,
+    AjaxGetProductNamesView,
 )
 
 
@@ -18,4 +20,6 @@ urlpatterns = [
     path('orders/', OrderListView.as_view(), name='orders'),
     path('order/<int:pk>/', OrderDetailView.as_view(), name='order-detail'),
     path('neworder/', OrderCreateView.as_view(), name='new-order'),
+    path('get_client_names/', AjaxGetClientNamesView.as_view(), name='get-client-names'),
+    path('get_product_names/', AjaxGetProductNamesView.as_view(), name='get-product-names'),
 ]

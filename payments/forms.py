@@ -13,12 +13,9 @@ class ProductModelForm(forms.ModelForm):
         fields = '__all__'
 
 class OrderModelForm(forms.ModelForm):
+    client = forms.CharField(max_length=100)
+    product = forms.CharField(max_length=100)
     class Meta:
         model = Order
         fields = ['client', 'product', 'description', 'quantity', 'rate']
-
-
-class OrderForm(forms.Form):
-    client = forms.CharField(label='Client')
-    product = forms.CharField(label='Product')
     

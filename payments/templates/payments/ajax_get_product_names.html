@@ -1,0 +1,5 @@
+{% if product_names.count > 0 %}
+    {% for product in product_names %}
+        <li>{{product.product_name}}</li>
+    {% endfor %}
+{% endif %}

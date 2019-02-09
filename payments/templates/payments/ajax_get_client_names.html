@@ -1,0 +1,5 @@
+{% if client_names.count > 0 %}
+    {% for client in client_names %}
+        <li>{{client.name}}</li>
+    {% endfor %}
+{% endif %}
